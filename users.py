@@ -15,6 +15,7 @@ parser.add_argument('-f', '--force', action='store_true',
                     help='Forcibly download user list even if it exists locally')
 parser.add_argument('-c', '--country', required=True, help='Country name'
                                         'As per RadioID.net')
+parser.add_argument('-s', '--city', help='City name as per RadioID.net')
 
 args = parser.parse_args()
 
@@ -26,7 +27,6 @@ def download_file():
 
     if not exists(radioid_file) or args.force:
         download_ext_path = f'country={args.country}' if args.country else print('Country name is required.') and exit(1)
-
 
         download_full_path = radioid_url + download_ext_path
 
@@ -50,6 +50,9 @@ def process_contacts():
     idx = 0
     channels = ''
     for item in json_list['results']:
+        # if city is specified, filter by city
+        if args.city and args.city.lower() != item['city'].lower():
+            continue
         idx += 1
         channels += format_channel(item)
     
@@ -73,7 +76,7 @@ def format_channel(item):
     surname = unicodedata.normalize('NFKD', item['surname']).encode('ascii', 'ignore').decode('utf-8').strip()
     
     # max len 16 chars
-    contact_name = f'{item["callsign"]} {name} {surname}'.strip()[:16]
+    contact_name = f'{item["callsign"]} {name}'.strip()[:16]
 
     if not contact_name in existing: existing[contact_name] = 0
     existing[contact_name] += 1
