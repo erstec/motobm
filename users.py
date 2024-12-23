@@ -60,7 +60,9 @@ def process_contacts():
 
     print(f'Processed {idx} records.')
 
-    write_zone_file(args.country,
+    city_name = '_' + args.city.lower() if args.city else ''
+
+    write_zone_file(args.country + city_name,
 f'''<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <config>
   <category name="PCRContacts">
