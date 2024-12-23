@@ -175,10 +175,16 @@ def format_channel(item):
     global existing
     global output_list
 
+    # take only first word of the city name and remove non-alphanumeric characters
+    ch_city = ''.join(e for e in item['city'].split()[0] if e.isalnum())
+
     if existing[item['callsign']] == 1:
         ch_alias = item['callsign']
     else:
         ch_alias = f"{item['callsign']} #{item['turn']}"
+    
+    # add the city name to the ch_alias and trim to 16 chars
+    ch_alias = f"{ch_alias} {ch_city}"[:16]
 
     ch_rx = item['rx']
     ch_tx = item['tx']
