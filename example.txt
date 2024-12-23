@@ -1,0 +1,5 @@
+python zone.py -f -n lithuania_zone -b uhf -t mcc -m 246 -6
+python zone.py -f -n latvia_zone -b uhf -t mcc -m 247 -6
+
+python users.py -f -c lithuania
+python users.py -f -c lithuania -s Vilnius
