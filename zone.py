@@ -181,10 +181,12 @@ def format_channel(item):
     if existing[item['callsign']] == 1:
         ch_alias = item['callsign']
     else:
-        ch_alias = f"{item['callsign']} #{item['turn']}"
+        ch_alias = f"{item['callsign']}-{item['turn']}"
     
     # add the city name to the ch_alias and trim to 16 chars
-    ch_alias = f"{ch_alias} {ch_city}"[:16]
+    ch_alias_single = f"{ch_alias} {ch_city}"[:16]
+    ch_alias_ts1 = f"{ch_alias} T1 {ch_city}"[:16]
+    ch_alias_ts2 = f"{ch_alias} T2 {ch_city}"[:16]
 
     ch_rx = item['rx']
     ch_tx = item['tx']
@@ -195,14 +197,14 @@ def format_channel(item):
 
     if item['rx'] == item['tx']:
         return f'''
-<set name="ConventionalPersonality" alias="{ch_alias}" key="DGTLCONV6PT25">
+<set name="ConventionalPersonality" alias="{ch_alias_single}" key="DGTLCONV6PT25">
   <field name="CP_PERSTYPE" Name="Digital">DGTLCONV6PT25</field>
   <field name="CP_SLTASSGMNT" Name="2">SLOT2</field>
   <field name="CP_COLORCODE">{ch_cc}</field>
   <field name="CP_TXFREQ">{ch_rx}</field>
   <field name="CP_RXFREQ">{ch_tx}</field>
   <field name="CP_EMACKALERTEN">True</field>
-  <field name="CP_CNVPERSALIAS">{ch_alias}</field>
+  <field name="CP_CNVPERSALIAS">{ch_alias_single}</field>
   <field name="CP_TXINHXPLEN" Name="Color Code Free">MTCHCLRCD</field>
   <field name="CP_MLTSTPSNLTIND">True</field>
   <field name="CP_GPSRVRTPERSIT" Name="Selected">SELECTED</field>
@@ -216,14 +218,14 @@ def format_channel(item):
     '''
 
     return f'''
-<set name="ConventionalPersonality" alias="{ch_alias} TS1" key="DGTLCONV6PT25">
+<set name="ConventionalPersonality" alias="{ch_alias_ts1}" key="DGTLCONV6PT25">
   <field name="CP_PERSTYPE" Name="Digital">DGTLCONV6PT25</field>
   <field name="CP_SLTASSGMNT" Name="1">SLOT1</field>
   <field name="CP_COLORCODE">{ch_cc}</field>
   <field name="CP_TXFREQ">{ch_rx}</field>
   <field name="CP_RXFREQ">{ch_tx}</field>
   <field name="CP_EMACKALERTEN">True</field>
-  <field name="CP_CNVPERSALIAS">{ch_alias} TS1</field>
+  <field name="CP_CNVPERSALIAS">{ch_alias_ts1}</field>
   <field name="CP_TXINHXPLEN" Name="Color Code Free">MTCHCLRCD</field>
   <field name="CP_MLTSTPSNLTIND">True</field>
   <field name="CP_GPSRVRTPERSIT" Name="Selected">SELECTED</field>
@@ -234,14 +236,14 @@ def format_channel(item):
   <field name="CP_TEXTMESSAGETYPE" Name="Advantage">TMS</field>
   <field name="CP_TRANSMITINTERRUPTTYPE" Name="Advantage">PROPRIETARY</field>
 </set>
-<set name="ConventionalPersonality" alias="{ch_alias} TS2" key="DGTLCONV6PT25">
+<set name="ConventionalPersonality" alias="{ch_alias_ts2}" key="DGTLCONV6PT25">
   <field name="CP_PERSTYPE" Name="Digital">DGTLCONV6PT25</field>
   <field name="CP_SLTASSGMNT" Name="2">SLOT2</field>
   <field name="CP_COLORCODE">{ch_cc}</field>
   <field name="CP_TXFREQ">{ch_rx}</field>
   <field name="CP_RXFREQ">{ch_tx}</field>
   <field name="CP_EMACKALERTEN">True</field>
-  <field name="CP_CNVPERSALIAS">{ch_alias} TS2</field>
+  <field name="CP_CNVPERSALIAS">{ch_alias_ts2}</field>
   <field name="CP_TXINHXPLEN" Name="Color Code Free">MTCHCLRCD</field>
   <field name="CP_MLTSTPSNLTIND">True</field>
   <field name="CP_GPSRVRTPERSIT" Name="Selected">SELECTED</field>
