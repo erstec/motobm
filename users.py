@@ -95,7 +95,7 @@ def format_channel(item):
           <field name="DU_ROUTETYPE" Name="Regular">REGULAR</field>
           <field name="DU_CALLPRCDTNEN">False</field>
           <field name="DU_RINGTYPE" Name="No Style">NOSTYLE</field>
-          <field name="DU_TXTMSGALTTNTP" Name="Repetitive">REPETITIVE</field>
+          <field name="DU_TXTMSGALTTNTP" Name="Momentary">MOMENTARY</field>
           <field name="DU_CALLTYPE" Name="Private Call">PRIVCALL</field>
           <field name="DU_OVCMCALL">False</field>
           <field name="DU_CALLTYPEPART2">0</field>
